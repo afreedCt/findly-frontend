@@ -1,0 +1,49 @@
+.swipe-container {
+  width: 220px;
+  height: 50px;
+  position: relative;
+  
+}
+
+.swipe-track {
+  width: 100%;
+  height: 100%;
+  background: #e7dada;
+  border-radius: 25px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px;
+}
+
+.swipe-label {
+  font-size: 14px;
+  color: #6c757d;
+  font-weight: 500;
+}
+
+.swipe-button {
+  width: 120px;
+  height: 40px;
+  border-radius: 20px;
+  text-align: center;
+  line-height: 40px;
+  font-weight: 600;
+  color: white;
+  position: absolute;
+  top: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.swipe-button.left {
+  left: 5px;
+  background-color: #198754; /* green */
+}
+
+.swipe-button.right {
+  right: 5px;
+  background-color: #dc3545; /* red */
+}
