@@ -88,7 +88,8 @@ const AllReports = () => {
                       : "---"}
                   </td>
                   <td>
-                    {/* {report.status !== "pending" ||
+
+                    {report.status !== "pending" ||
                     report.type == "user" ||
                     (report.type == "post" &&
                       report.reportedPost.status !== "removed") ||
@@ -100,7 +101,7 @@ const AllReports = () => {
                       )
                     ) : (
                       <span className="fw-bold">Already removed</span>
-                    )} */}
+                    )}
 
                     
                   </td>

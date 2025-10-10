@@ -1,16 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import UserHeader from "./UserHeader";
-import { claims, dummyPosts } from "../assets/assets";
-import {
-  button,
-  div,
-  h1,
-  h3,
-  span,
-  td,
-  text,
-  title,
-} from "framer-motion/client";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
@@ -19,6 +8,8 @@ import { userContext } from "../context/ContextAPI";
 import SERVER_URL from "../server/server";
 import { addMessageAPI, updateClaimAPI } from "../server/allAPI";
 import { toast } from "react-toastify";
+const userDefaultImg =
+  "https://img.freepik.com/premium-vector/minimalist-user-vector-icon-illustration_547110-2552.jpg";
 
 const MyClaims = () => {
   const [selectedField, setSelectedField] = useState("myclaim");
@@ -369,8 +360,9 @@ const MyClaims = () => {
             <img
               src={
                 claimUser?.profilePic?.startsWith("http")
-                  ? claimUser.profilePic
-                  : claimUser
+                  ? claimUser?.profilePic
+                  : claimUser?.profilePic?`${SERVER_URL}/uploads/${claimUser.profilePic}`
+                  : userDefaultImg
               }
               width={200}
               height={200}

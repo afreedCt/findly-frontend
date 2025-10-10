@@ -16,7 +16,7 @@ import {
 import { useContext } from "react";
 import { userContext } from "../context/ContextAPI";
 // import OtpInput from "../components/otpInput";
-import OtpInput from '../components/OtpInput'
+import OtpInput from "../components/OtpInput";
 import { Spinner } from "react-bootstrap";
 import SERVER_URL from "../server/server";
 
@@ -102,20 +102,20 @@ const AuthPage = ({ isLogin }) => {
           toast.success(res.data.message);
           setUser(res.data.user);
           if (!res.data.user.isActive) {
-            toast.info("you are baned by admin");
+            toast.error("you are baned by admin");
             return;
           }
-          if (res.data.user.role == "user") {
-            console.log("to user dashboard");
 
+          if (res.data.user.role == "user") {
+            // console.log("to user dashboard");
             navigate("/user-dashboard");
           } else {
-            console.log("to admin dashboard");
+            // console.log("to admin dashboard");
             navigate("/admin-dashboard");
           }
         }
       } catch (error) {
-        console.log("error to login in authPage : ", error);
+        // console.log("error to login in authPage : ", error.message);
         toast.error(error.message);
       }
     } else {
@@ -126,12 +126,15 @@ const AuthPage = ({ isLogin }) => {
   const handleGoogleSuccess = async (res) => {
     try {
       const token = res.credential;
-      const response = await axios.post(
-        `${SERVER_URL}/api/auth/google`,
-        {
-          token,
-        }
-      );
+      const response = await axios.post(`${SERVER_URL}/api/auth/google`, {
+        token,
+      });
+      
+      if (!response.data.user.isActive) {
+        toast.error("you are baned by admin");
+        return;
+      }
+      
       setUser(response.data.user);
       // console.log("first", response.data.user);
       sessionStorage.setItem("user", JSON.stringify(response.data.user));
@@ -145,7 +148,7 @@ const AuthPage = ({ isLogin }) => {
       }
       toast.success("successfully logined");
     } catch (error) {
-      console.log(error)
+      console.log(error.message);
       toast.error(error.message);
     }
   };

@@ -1,18 +1,27 @@
 import React, { useEffect, useState } from "react";
-import { claims, dummyPosts } from "../assets/assets";
-import { Table } from "react-bootstrap";
+import { Button, Modal, Table } from "react-bootstrap";
 import AdminHeader from "./AdminHeader";
 import { adminClaimsAPI } from "../server/allAPI";
 import Spinner from "react-bootstrap/Spinner";
-import { div } from "framer-motion/client";
+const userDefaultImg =
+  "https://img.freepik.com/premium-vector/minimalist-user-vector-icon-illustration_547110-2552.jpg";
+
 
 const AdminAllClaims = () => {
   const [searchKey, setSearchKey] = useState("");
   const [loading, setLoading] = useState(false);
-  // claims.map((c, i) => {
-  //   let data = dummyPosts.find((p) => p.id == c.postId);
-  //   claims[i] = { ...claims[i], post: data };
-  // });
+  const [claimUser, setClaimUser] = useState({});
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => {
+    setShow(false);
+    setClaimUser(null);
+  };
+  const handleShow = (user) => {
+    setShow(true);
+    setClaimUser(user);
+  };
 
   const [claims, setClaims] = useState([]);
 
@@ -44,20 +53,22 @@ const AdminAllClaims = () => {
 
   // <Spinner animation="border" variant="primary" />
   return (
-    <div className="">
+    <div className="commonBg">
       <AdminHeader />
-      <div className="d-flex justify-content-end mt-3 me-5">
+      <div className="d-flex justify-content-between mt-3 mb-2 me-">
+        <h1 className="fw-bold my ms-5">All Claims</h1>
         <select
           onChange={(e) => setSearchKey(e.target.value)}
           name="filter"
           id=""
-          className="p-2"
+          className="p-2 me-5"
         >
           <option value="">All Claims</option>
           <option value="Pending">Pending</option>
           <option value="Approved">Approved</option>
           <option value="Rejected">Rejected</option>
         </select>
+
       </div>
       {loading ? (
         <div className="d-flex justify-content-center my-3">
@@ -65,9 +76,9 @@ const AdminAllClaims = () => {
         </div>
       ) : claims.length > 0 ? (
         <div className="overflow-auto ">
-          <div className="d-flex justify-content-between mx-4 my-3">
+          {/* <div className="d-flex justify-content-between mx-4 my-3">
             <h1 className="fw-bold my ms-5">All Claims</h1>
-          </div>
+          </div> */}
           <Table
             className="container"
             style={{ overflow: "hidden" }}
@@ -91,13 +102,22 @@ const AdminAllClaims = () => {
                 <tr key={ind}>
                   <td>{ind + 1}</td>
                   <td>{claim?.postId?.title}</td>
-                  <td>{claim?.claimerId.username}</td>
+                  <td>
+                    {claim?.claimerId.username}{" "}
+                    <i
+                      onClick={() => handleShow(claim.claimerId)}
+                      className="ms-1"
+                      style={{ cursor: "pointer" }}
+                    >
+                      👀
+                    </i>
+                  </td>
                   <td>{claim?.message} </td>
                   <td>{new Date(claim?.createdAt).toDateString()}</td>
                   <td
                     className={`${claim.status == "approved" && "text-success"}
                     ${claim.status == "rejected" && "text-danger"}
-                    ${claim.status=="pending" && 'text-warning'} fw-bold`}
+                    ${claim.status == "pending" && "text-warning"} fw-bold`}
                   >
                     {claim?.status}
                   </td>
@@ -115,6 +135,49 @@ const AdminAllClaims = () => {
           <h3>No claims as of now</h3>
         </div>
       )}
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Modal heading</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="d-flex justify-content-center ">
+            <img
+              src={
+                claimUser?.profilePic?.startsWith("http")
+                  ? claimUser?.profilePic
+                  : claimUser?.profilePic
+                  ? `${SERVER_URL}/uploads/${claimUser.profilePic}`
+                  : userDefaultImg
+              }
+              width={200}
+              height={200}
+              className="rounded-3"
+              alt="User Image"
+            />
+          </div>
+          <h5 className="text-center my-3">
+            Username : <strong>{claimUser?.username}</strong>{" "}
+          </h5>
+          <h5 className="text-center my-3">
+            Email : <strong>{claimUser?.email}</strong>{" "}
+          </h5>
+          <h5 className="text-center my-3">
+            Joined At :{" "}
+            <strong>
+              {new Date(claimUser?.createdAt).toLocaleDateString()}
+            </strong>{" "}
+          </h5>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="danger" onClick={handleClose}>
+            Close
+          </Button>
+          {/* <Button variant="primary" onClick={handleClose}>
+            Save Changes
+          </Button> */}
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };

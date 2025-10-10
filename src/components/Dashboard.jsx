@@ -13,6 +13,8 @@ const Dashboard = () => {
   const [totalSum, setTotalSum] = useState(0);
   const [loading, setLoading] = useState(false);
 
+  console.log(allPayments)
+
   // pagination
   const [currentPage, setCurrentPage] = useState(1);
   const rowsPerPage = 5;
@@ -98,7 +100,7 @@ const Dashboard = () => {
                 {currentRows.map((payment, index) => (
                   <tr key={payment._id}>
                     <td>{index + 1}</td>
-                    <td>{payment.userId.username}</td>
+                    <td>{payment?.userId?.username?payment.userId.username:"User not found"}</td>
                     <td>₹{payment.amount}</td>
                     <td>
                       <Badge
