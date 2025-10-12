@@ -36,12 +36,19 @@ const AuthPage = ({ isLogin }) => {
       try {
         const res=await registerAPI({username,email,password})
         console.log("register res : ",res)
+        if(res.status===406){
+          toast.warning(res.response.data.message)
+        }
         if(res.status===201){
+          console.log("first")
+          // setTimeout(() => {
+            setUsername("")
+            setEmail("")
+            setPassword("")
+          // }, 100);
+          console.log(username,email,password)
           toast.success("successfully created")
           navigate('/login')
-          setUsername("")
-          setEmail("")
-          setPassword("")
         }
       } catch (error) {
         toast.error(error.message)
@@ -202,6 +209,7 @@ const AuthPage = ({ isLogin }) => {
                       className="mb-3"
                     >
                       <Form.Control
+                      value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         type="text"
                         placeholder="enter your username"
@@ -219,11 +227,13 @@ const AuthPage = ({ isLogin }) => {
                       type="email"
                       required
                       placeholder="name@example.com"
+                      value={email}
                     />
                   </FloatingLabel>
 
                   <FloatingLabel controlId="floatingPassword" label="Password">
                     <Form.Control
+                    value={password}
                       // onKeyDown={(e) => handleKeyDown(e)}
                       onChange={(e) => setPassword(e.target.value)}
                       type="password"
