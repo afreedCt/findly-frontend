@@ -45,7 +45,7 @@ const GuestPage = () => {
         </div>
       </div>
 
-      {/* <!-- Stats Section --> */}
+      {/* <!-- Status Section --> */}
       <div className="py-5 bg-light">
         <div className="container">
           <div className="row text-center gap-3 justify-content-center">
@@ -84,7 +84,7 @@ const GuestPage = () => {
       {/* Latest posts */}
       <div className="container py-3 bg-secondary">
         <h2 className="fw-bold text-center mb-4">Latest Posts</h2>
-        <div className="d-flex flex-wrap gap-3 ms-5 justify-content-center justify-content-md-start">
+        <div className="d-flex flex-wrap gap-3 ms-md-0 ms-5 justify-content-center justify-content-md-start">
           {guestPosts.slice(0, 4).map((post, index) => (
             <GuestPageCards key={index} post={post} />
           ))}
