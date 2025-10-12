@@ -14,7 +14,7 @@ const MyPosts = () => {
       <UserHeader />
       
       <h1 className="fw-bold ms-5 my-4">My Posts</h1>
-      <div className="d-flex flex-wrap gap-3 ms-5 justify-content-center justify-content-md-start">
+      <div className="d-flex flex-wrap gap-3 ms-0 ms-md-5 justify-content-center justify-content-md-start">
         {
           userPosts.length>0?
           (

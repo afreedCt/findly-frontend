@@ -13,7 +13,7 @@ const AllPosts = () => {
   return (
     <div className="commonBg">
       <UserHeader searchBar />
-      <div className=" p-4"> 
+      <div className=""> 
         <div className=" d-flex justify-content-between align-items-center">
           <h3
             onClick={() => setPostField("")}
@@ -44,7 +44,7 @@ const AllPosts = () => {
         </div>
 
         {/* </div> */}
-        <div className="d-flex flex-wrap gap-3 ms-5 justify-content-center justify-content-md-start">
+        <div className="d-flex flex-wrap gap-3 ms-0 ms-md-5 justify-content-center justify-content-md-start">
           {loading ? (
             <div className="d-flex justify-content-center w-100 h-100 align-items-center mt-5">
               <Spinner animation="border" variant="primary" />

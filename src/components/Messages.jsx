@@ -159,6 +159,9 @@ const Messages = () => {
                     </div>
                   ))}
                 </div>
+                <div className="btn btn-primary d-flex d-sm-none">
+                  {currentPage}
+                </div>
               </span>
               <button
                 className="btn btn-outline-primary"

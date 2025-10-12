@@ -332,6 +332,9 @@ const MyClaims = () => {
                   </div>
                 ))}
               </div>
+              <div className="d-flex d-sm-none btn btn-primary">
+                {currentPage}
+              </div>
             </span>
             <button
               className="btn btn-outline-primary"

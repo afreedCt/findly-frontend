@@ -80,10 +80,10 @@ const ViewPost = () => {
       <UserHeader/>
     <div className="d-flex justify-content-center align-items-center min-vh-100 dashboard">
       <div
-        className="shadow-lg row box-shadow bg-light p-3 rounded-5"
+        className="shadow-lg row w-100 container box-shadow bg-light p-3 rounded-5"
         style={{ width: "auto", minHeight: "450px" }}
       >
-        <div className="col-lg-6 overflow-hidden d-flex flex-column align-items-center ">
+        <div className="col-12 col-md-8 col-lg-6 overflow-hidden d-flex flex-column align-items-center ">
           <Link
             className="text-decoration-none text-dark my-4"
             style={{ marginRight: "auto", cursor: "pointer" }}
@@ -99,7 +99,7 @@ const ViewPost = () => {
             alt={post?.title}
           />
         </div>
-        <div className="col-md-6 text-center text-md-start ps-4 d-flex flex-column pt- ">
+        <div className="col-12 col-md-8 col-lg-6 text-center text-md-start ps-4 d-flex flex-column pt- ">
           {/* <div> */}
           <ReportUser post={post} />
 

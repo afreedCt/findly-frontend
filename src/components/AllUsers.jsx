@@ -53,9 +53,9 @@ const AllUsers = () => {
       <AdminHeader />
 
       <div className="overflow-auto">
-        <div className="d-flex justify-content-between my-4">
+        <div className="d-flex justify-content-between flex-wrap my-4">
           <h1 className="ms-5 my-">All Users</h1>
-          <input type="search" value={serachInput} onChange={(e)=>setSearchInput(e.target.value)} className="me-5 rounded-4 ps-3" placeholder="search by username" />
+          <input type="search" value={serachInput} onChange={(e)=>setSearchInput(e.target.value)} className="mx-5 rounded-4 ps-3" placeholder="search by username" />
         </div>
         {loading ? (
           <div className="d-flex justify-content-center my-5">

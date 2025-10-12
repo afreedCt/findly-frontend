@@ -31,12 +31,12 @@ const AllReports = () => {
     }
   };
   return (
-    <div>
+    <div className="commonBg">
       <AdminHeader />
-      <div className="container">
+      <div className="container ">
         <h1 className="fw-bold my-4">All Reports</h1>
         {loading ? (
-          <div className="d-flex justify-content-center">
+          <div className="d-flex justify-content-center my-5">
             <Spinner animation="border" variant="primary" />
           </div>
         ) : allReports.length > 0 ? (

@@ -196,7 +196,7 @@ const AuthPage = ({ isLogin }) => {
           }}
         >
           <div className="col-md-6 bg- right p-3 ">
-            {!otp ? (
+            {/* {!otp ? ( */}
               <div>
                 <h1 className="fw-bold text-dark text-center fs-1 mb-3">
                   {isLogin ? "Login" : "Register"}
@@ -249,12 +249,8 @@ const AuthPage = ({ isLogin }) => {
                     >
                       Login
                     </button>
-                  ) : // {
-                  otpLoading ? (
-                    <div className="d-flex justify-content-center mx-4 my-2">
-                      <Spinner animation="border" variant="primary" />
-                    </div>
-                  ) : (
+                  ) : 
+                   (
                     <button
                       onClick={handleRegister}
                       // onClick={handleSendOtp}
@@ -265,6 +261,7 @@ const AuthPage = ({ isLogin }) => {
                   )
                   // }
                 }
+                <div className="d-flex justify-content-center d-sm-block justify-content-sm-center">
                 <GoogleOAuthProvider
                   clientId={import.meta.env.VITE_GOOGLE_CLIENT_SECRET}
                 >
@@ -273,6 +270,7 @@ const AuthPage = ({ isLogin }) => {
                     onError={() => console.log("Login Failed")}
                   />
                 </GoogleOAuthProvider>
+                </div>
                 {isLogin ? (
                   <p className="d-flex d-md-none mt-2 p-1">
                     Don't have an acount <Link to={"/register"}>Register</Link>
@@ -283,14 +281,15 @@ const AuthPage = ({ isLogin }) => {
                   </p>
                 )}
               </div>
-            ) : (
+            {/* )  */}
+            {/* : (
               // for otp section
               <OtpInput
                 email={email}
                 length={6}
                 onSubmitOtp={handleVerifyOtp}
               />
-            )}
+            )} */}
           </div>
 
           <div
@@ -311,8 +310,6 @@ const AuthPage = ({ isLogin }) => {
             <h5 className=" p-3">
               {isLogin ? "Don't have an Account" : "Already have an Account"}
             </h5>
-            {/* <h1>Welcome back !</h1>
-//             <h4 className=" p-3">Already have an Account ...</h4> */}
             {isLogin ? (
               <Link
                 className="text-decoration-none text-white fw-bold btn btn-white border border-2"

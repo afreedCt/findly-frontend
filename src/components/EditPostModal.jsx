@@ -146,7 +146,7 @@ const EditPostModal = ({ post }) => {
               <label htmlFor="exampleSelect1" class="form-label mt-4">
                 post type
               </label>
-              <div className="row">
+              <div className="row gap-2">
                 <div className="col-md-6">
                   <select
                     className="form-select p-3"

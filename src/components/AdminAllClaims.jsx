@@ -71,7 +71,7 @@ const AdminAllClaims = () => {
 
       </div>
       {loading ? (
-        <div className="d-flex justify-content-center my-3">
+        <div className="d-flex justify-content-center my-5">
           <Spinner animation="border" variant="primary" />
         </div>
       ) : claims.length > 0 ? (

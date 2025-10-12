@@ -136,7 +136,24 @@ backdrop-filter: blur(15px);
 border: 1px solid rgba(255, 255, 255, 0.3);
 } */
 
-.contact {
+/* .contact {
   /* background: #74cfc6; */
+  /* background: linear-gradient(to right, #6366f1, #ff5cf1); */
+/* } */ 
+
+.contact {
+  max-width: 600px;
+  width: 100%;
   background: linear-gradient(to right, #6366f1, #ff5cf1);
+}
+
+@media (max-width: 576px) {
+  .contact {
+    padding: 1.5rem;
+    border-radius: 10px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
 }
