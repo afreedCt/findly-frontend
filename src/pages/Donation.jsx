@@ -22,16 +22,16 @@ const Donation = () => {
   const { getMessageCount } = useContext(userContext);
   const [donationLoading, setDonationLoading] = useState(false);
 
-   useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://checkout.razorpay.com/v1/checkout.js";
-    script.async = true;
-    document.body.appendChild(script);
+  //  useEffect(() => {
+  //   const script = document.createElement("script");
+  //   script.src = "https://checkout.razorpay.com/v1/checkout.js";
+  //   script.async = true;
+  //   document.body.appendChild(script);
 
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
+  //   return () => {
+  //     document.body.removeChild(script);
+  //   };
+  // }, []);
   // Handle Payment
   const handlePayment = async (e) => {
     e.preventDefault(); // stop page reload
@@ -64,8 +64,6 @@ const Donation = () => {
       image: logo,
       order_id: data.data.order.id,
       handler: async (response) => {
-        // console.log("response",response)
-        // console.log("response", response);
         setDonationLoading(true);
         try {
           const res = await verifyOrderAPI(response, reqHeader);
@@ -80,8 +78,6 @@ const Donation = () => {
             };
 
             const msgRes = await addDonationMessageAPI(msgBody, reqHeader);
-
-            // console.log(msgRes);
             if (msgRes) {
               getMessageCount();
             }
@@ -101,32 +97,32 @@ const Donation = () => {
     const rzp1 = new window.Razorpay(options);
     rzp1.open();
     // let paymentFailedHandled = false;
-    // rzp1.on("payment.failed", async function (response) {
-    //   setDonationLoading(true);
-    //   // console.log(paymentFailedHandled)
+    rzp1.on("payment.failed", async function (response) {
+      setDonationLoading(true);
+       // console.log(paymentFailedHandled)
 
-    //   if (!paymentFailedHandled) {
-    //     try {
-    //       const res = await FailedOrderAPI(response.error.metadata, reqHeader);
-    //       // console.log(res);
-    //       if (res.data.success) {
-    //         const msgBody = {
-    //           title: "Donation Failed ❌",
-    //           type: "system",
-    //           text: `Donation for ₹ ${amount} was failed`,
-    //         };
-    //         const msgRes = await addDonationMessageAPI(msgBody, reqHeader);
-    //         // console.log(msgRes);
-    //         paymentFailedHandled = true;
-    //       }
-    //       navigate("/all-posts");
-    //       // toast.warning("payment failed")
-    //     } catch (error) {
-    //       setDonationLoading(false);
-    //       console.log("error to update status failed : ", error);
-    //     }
-    //   }
-    // });
+      if (!paymentFailedHandled) {
+        try {
+          const res = await FailedOrderAPI(response.error.metadata, reqHeader);
+          // console.log(res);
+          if (res.data.success) {
+            const msgBody = {
+              title: "Donation Failed ❌",
+              type: "system",
+              text: `Donation for ₹ ${amount} was failed`,
+            };
+            const msgRes = await addDonationMessageAPI(msgBody, reqHeader);
+            // console.log(msgRes);
+            paymentFailedHandled = true;
+          }
+          navigate("/all-posts");
+          // toast.warning("payment failed")
+        } catch (error) {
+          setDonationLoading(false);
+          console.log("error to update status failed : ", error);
+        }
+      }
+    });
   };
 
   return (

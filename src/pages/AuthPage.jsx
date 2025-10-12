@@ -31,6 +31,21 @@ const AuthPage = ({ isLogin }) => {
 
   const { user, setUser } = useContext(userContext);
 
+  const handleRegister=async()=>{
+    if(username && email && password){
+      try {
+        const res=await registerAPI({username,email,password})
+        console.log("register res : ",res)
+        if(res.status===201){
+          toast.success("successfully created")
+          navigate('/login')
+        }
+      } catch (error) {
+        toast.error(error.message)
+      }
+    }
+  }
+
   const handleSendOtp = async () => {
     setOtpLoading(true);
     if (username && email && password) {
@@ -228,8 +243,8 @@ const AuthPage = ({ isLogin }) => {
                     </div>
                   ) : (
                     <button
-                      // onClick={handleRegister}
-                      onClick={handleSendOtp}
+                      onClick={handleRegister}
+                      // onClick={handleSendOtp}
                       className="btn btn-outline-primary w-100 rounded-3 my-3"
                     >
                       Register
