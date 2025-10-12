@@ -39,6 +39,9 @@ const AuthPage = ({ isLogin }) => {
         if(res.status===201){
           toast.success("successfully created")
           navigate('/login')
+          setUsername("")
+          setEmail("")
+          setPassword("")
         }
       } catch (error) {
         toast.error(error.message)
